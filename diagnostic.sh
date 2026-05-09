@@ -9,7 +9,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # CONFIGURATION
-USER=(whoami)
+USER=$(whoami)
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;" 2>/dev/null | cut -d. -f1,2)
 POOL_FILE="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
 LOG_FILE="/var/log/diagnostic.log"
