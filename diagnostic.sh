@@ -9,7 +9,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # CONFIGURATION
-USER=$(whoami)
+USER=nginx
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;" 2>/dev/null | cut -d. -f1,2)
 POOL_FILE="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
 LOG_FILE="/var/log/diagnostic.log"
@@ -70,13 +70,6 @@ diagnostic() {
 
     echo -e "\n${YELLOW}8. OPCache Status:${NC}"
     php -r "if(function_exists('opcache_get_status')){ \$s=opcache_get_status(false); echo 'Enabled: '.(isset(\$s['opcache_enabled'])?'Yes':'No').'\nMemory: '.round(\$s['memory_usage']['used_memory']/1024/1024,2).'MB / '.round(\$s['memory_usage']['current_memory_usage']/1024/1024,2).'MB';}" 2>/dev/null || echo "OPCache not installed"
-
-    echo -e "\n${YELLOW}9. Laravel Cache Status:${NC}"
-    if [[ -f "artisan" ]]; then
-        php artisan config:status 2>/dev/null || echo "Run from Laravel project root for cache status"
-    else
-        echo "Not in Laravel project directory"
-    fi
 
     echo -e "\n${YELLOW}10. File Permissions Check:${NC}"
     if [[ -d "storage" ]] && [[ -d "bootstrap/cache" ]]; then
