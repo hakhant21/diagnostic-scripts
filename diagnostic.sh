@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 # CONFIGURATION
 USER=nginx
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;" 2>/dev/null | cut -d. -f1,2)
-POOL_FILE="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
+POOL_FILE="/etc/php-fpm.d/www.conf"
 LOG_FILE="/var/log/diagnostic.log"
 WATCH_PID_FILE="/tmp/php-fpm-watch.pid"
 MYSQL_SLOW_LOG="/var/log/mysql/mysql-slow.log"
